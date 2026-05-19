@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerName example.com
+    DocumentRoot /var/www/Inventory_Management_System/public
+
+    <Directory /var/www/Inventory_Management_System/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/inventory_error.log
+    CustomLog ${APACHE_LOG_DIR}/inventory_access.log combined
+</VirtualHost>
