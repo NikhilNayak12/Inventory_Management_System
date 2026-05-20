@@ -2,6 +2,12 @@
 
 This project is ready to deploy once you provide production environment values and point a web server at the `public/` directory.
 
+## Quick Start: Deploy to Render (Recommended)
+
+See [RENDER_DEPLOY.md](RENDER_DEPLOY.md) for step-by-step Render.com deployment with Docker.
+
+---
+
 ## 1. Set production environment values
 
 Update [`.env`](.env) with your live values:
