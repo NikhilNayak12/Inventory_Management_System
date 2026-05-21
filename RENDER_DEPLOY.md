@@ -89,7 +89,7 @@ Then open [http://localhost:8000](http://localhost:8000)
 
 ## File Breakdown
 
-- **Dockerfile**: Defines the container image with PHP 8.1, Node.js, and Laravel setup
+- **Dockerfile**: Defines the container image with PHP 8.2, Node.js, and Laravel setup
 - **render.yaml**: Infrastructure-as-code configuration (optional but recommended)
 - **.dockerignore**: Excludes unnecessary files from the build
 
