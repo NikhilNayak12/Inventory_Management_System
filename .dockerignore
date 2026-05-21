@@ -2,9 +2,10 @@
 .git
 .gitignore
 .gitattributes
+.vscode
+bootstrap/cache/*.php
 .github
 .editorconfig
-.vscode
 *.md
 node_modules
 vendor

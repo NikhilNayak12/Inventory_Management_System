@@ -11,6 +11,10 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_URL
+        value: https://inventory-management-system-2-htk3.onrender.com
+      - key: ASSET_URL
+        value: https://inventory-management-system-2-htk3.onrender.com
       - key: LOG_CHANNEL
         value: stderr
       - key: DB_CONNECTION
