@@ -5,6 +5,8 @@ services:
     dockerfile: ./Dockerfile
     plan: free
     envVars:
+      - key: APP_KEY
+        generateValue: true
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
@@ -12,7 +14,7 @@ services:
       - key: LOG_CHANNEL
         value: stderr
       - key: DB_CONNECTION
-        scope: build
+        value: pgsql
       - key: DB_HOST
         fromDatabase:
           name: postgres
