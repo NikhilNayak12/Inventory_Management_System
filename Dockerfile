@@ -50,5 +50,9 @@ RUN php artisan storage:link || true
 # Expose port 8000 for Render
 EXPOSE 8000
 
-# Start application and try to apply migrations at runtime
-CMD ["sh", "-c", "php artisan migrate --force || true; php -S 0.0.0.0:8000 -t /app/public"]
+# Copy and mark entrypoint
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Start the app using the entrypoint script which waits for DB and runs migrations
+CMD ["/start.sh"]
