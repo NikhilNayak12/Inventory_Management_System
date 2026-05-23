@@ -1,25 +1,22 @@
 #!/bin/sh
 set -e
 
-echo "Container entrypoint: waiting for database..."
+echo "Preparing SQLite database..."
+mkdir -p /app/database
+touch /app/database/database.sqlite
 
-MAX_TRIES=30
-i=0
-while [ $i -lt $MAX_TRIES ]; do
-  if php -r "try {\n    $dsn = (getenv('DB_CONNECTION') === 'pgsql') ? 'pgsql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT').';dbname='.getenv('DB_DATABASE') : 'mysql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT').';dbname='.getenv('DB_DATABASE');\n    new PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));\n    echo 'db_ok';\n  } catch (Exception $e) { exit(1);}" 2>/dev/null; then
-    echo "Database is available"
-    break
-  fi
-  i=$((i+1))
-  echo "Waiting for DB... ($i/$MAX_TRIES)"
-  sleep 2
-done
+export DB_CONNECTION=sqlite
+export DB_DATABASE=/app/database/database.sqlite
+export DB_HOST=
+export DB_PORT=
+export DB_USERNAME=
+export DB_PASSWORD=
 
-if [ $i -ge $MAX_TRIES ]; then
-  echo "Warning: database did not become available after $MAX_TRIES tries"
-fi
+echo "Clearing cached config"
+php artisan config:clear || true
+php artisan cache:clear || true
 
-echo "Running migrations (if any)"
+echo "Running migrations"
 php artisan migrate --force || echo "Migrations failed or skipped"
 
 echo "Ensure storage link"
